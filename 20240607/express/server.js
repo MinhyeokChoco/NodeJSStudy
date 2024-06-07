@@ -1,7 +1,7 @@
 // http net 구현했던 네트워크 TCP
 // 모던한 느낌으로 외장모듈 라이브러리를 구현한 것.
 
-// Resurtfull API // get / post / put / delete
+// Resurtful API // get / post / put / delete
 // API : Application Programing Interface
 
 // get : 내용을 조회
