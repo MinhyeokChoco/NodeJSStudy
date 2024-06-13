@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>리스트 페이지</title>
+</head>
+
+<body>
+    <div id="list_title">리스트 페이지</div>
+    <a href="/write">작성 페이지로 이동하실게요.</a>
+    <% data.forEach((el)=> { %>
+        <div>
+            <span>
+                <%= el.id %>
+            </span>
+            <span>
+                <%= el.title %>
+            </span>
+            <span>
+                <%= el.content %>
+            </span>
+            <span>
+                <%= el.views %>
+            </span>
+            <button id="modifybtn" onclick="location.href = '/update/<%= el.id %>'">수정</button>
+            <button id="deletebtn" onclick="location.href = '/list/<%= el.id %>'">삭제</button>
+        </div>
+        <% }); %>
+</body>
+
+</html>
