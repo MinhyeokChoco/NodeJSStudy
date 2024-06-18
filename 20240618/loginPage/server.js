@@ -41,3 +41,5 @@ const test = async () => {
     console.log(await compare("123", "$2b$10$mTwtpssq6kuBdaDvSRxWKOZPZKPg3T6qMIt4QOopiQnmDEww.b4FK"))
 }
 test();
+
+// bcrypt를 가지고 crypto로 회원가입 했던 코드 복습
