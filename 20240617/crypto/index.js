@@ -155,3 +155,4 @@ app.listen(PORT, () => {
 
 // 구조분해할당 객체 배열
 // values가 들어갈 때와 안 들어갈 때의 차이
+// CreatePool과 CreateConnection 차이
