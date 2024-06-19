@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "express": "^4.19.2",
+    "multer": "^1.4.5-lts.1"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "20240619",
+  "description": "> Multer express 환경에서 파일의 업로드를 처리하는 미들웨어 > 주로 multipart/form-data 형식의 데이터를 파일 처리 할 때 사용합니다. > 파일 업로드를 할 수 있도록 기능을 제공합니다. > 메모리 혹은 파일을 디렉터리에 저장하는 옵션을 사용 할 수 있습니다.",
+  "version": "1.0.0",
+  "main": "server.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
