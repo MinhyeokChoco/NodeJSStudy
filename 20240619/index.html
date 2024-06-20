@@ -31,9 +31,7 @@
         // files : input에 담겨 있는 file 자체
         form.append("upload", file.files[0]);
         // {data : {id : 1, pw : 2}}
-        axios.post("http://127.0.0.1:3000/upload", form, {
-            "Content-Type": "multipart/form-data"
-        }).then((e) => {
+        axios.post("http://127.0.0.1:4000/login", { uid: 1, upw: 2 }).then((e) => {
             console.log("잘 업로드 됐어");
             console.log(e.data);
         })
