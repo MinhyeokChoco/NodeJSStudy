@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <style>
+        body {
+            width: 100%;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        .content{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 500px;
+            height: 500px;
+            border: 1px solid;
+        }
+        #login {
+            width: 300px;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #login > h1 {
+            display: block;
+        }
+
+        #main {
+            display: none;  
+        }
+
+        #send {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            border: 1px solid;
+            box-sizing: border-box;
+            display: flex;
+        }
+        #send #msgInput {
+            border: 0;
+            box-sizing: border-box;
+            padding: 3px 6px;
+            width: 85%;
+        }
+        #send #sendBtn {
+            background-color: yellow;
+            border: none;
+            box-sizing: border-box;
+            padding: 10px;
+            width: 15%;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div>귀여운 동물 카톡</div>
+        <div id="login">
+            <h1>로그인</h1>
+            <input type="text" id="username">
+            <button id="loginBtn">접속</button>
+        </div>
+        <div id="main">
+            <select name="" id="rooms">
+                <option value="병아리">병아리 방</option>
+                <option value="고양이">고양이 방</option>
+                <option value="오리">오리 방</option>
+            </select>
+            <ul id="message"></ul>
+            <div id="send">
+                <input type="text" id="msgInput">
+                <button id="sendBtn">보내기</button>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    let socket = null;
+    let room = "";
+    let name = "";
+    loginBtn.onclick = () => {
+        login.style.display = "none";
+        main.style.display = "block";
+        if(!socket) socket = io.connect();
+
+        room = rooms.options[rooms.selectedIndex].value;
+        name = username.value;
+        if(socket) socket.emit("joinRoom", room, username.value);
+        socket.on("joinRoom", (room, name) => {
+            const li = document.createElement("li");
+            li.classList.add("join-text");
+            li.innerHTML = `${room}에 ${name}님이 들어오셨습니다.`;
+            message.append(li);
+        })
+
+        // 방에서 나가는거
+        socket.on("leaveRoom", () => {
+            const li = document.createElement("li");
+            li.classList.add("join-text");
+            li.innerHTML = `${room}에 ${name}가 나갔어...힝..`;
+            message.append(li);
+        })
+
+        // 채팅
+        socket.on("chat", (name, msg) => {
+            const li = document.createElement("li");
+            li.classList.add("join-text");
+            li.innerHTML = `${name} : ${msg}`;
+            message.append(li);
+        })
+
+        // 귓말 받기
+        socket.on("quiet", (room, name, msg) => {
+            console.log(name);
+            const li = document.createElement("li");
+            li.classList.add("join-text");
+            li.innerHTML = `${room}에서 ${name}님이 ${msg}를 보내셨습니다.`;
+            message.append(li);
+        })
+    }
+
+
+    rooms.onchange = (e) => {
+        // console.log(e.target.selectedIndex);
+        // console.log(e.target.options);
+        console.log(e.target.options[e.target.selectedIndex].value);
+        // 방에서 나간거
+        // room === 이전방(병아리)
+        socket.emit("leaveRoom", room, name);
+        room = e.target.options[e.target.selectedIndex].value;
+        // 다음번에 내용을 재할당(오리)
+        socket.emit("joinRoom", room, name);
+    }
+    
+    sendBtn.onclick = () => {
+        if((msgInput.value.charAt(0) === "/") && (msgInput.value.charAt(1) === "w")){
+            const split = msgInput.value.split(" ");
+            const receiver = split[1];
+            const msg = split[2];
+            socket.emit("quiet", room, receiver, name, msg);
+            return msgInput.value = "";
+        }
+        socket.emit("chat", room, name, msgInput.value);
+        msgInput.value = "";
+    }
+</script>
+</html>
