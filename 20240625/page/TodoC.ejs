@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>할 일 작성</title>
+    <link rel="stylesheet" href="../public/TodoC.css">
+
+</head>
+
+<body>
+    <form action="/Todoc" method="post" enctype="multipart/form-data">
+        <div class="todowrap">
+            <div class="title">해야 할 일 등록</div>
+            <div class="todoCreate">
+                <label for="">해야 할 일</label>
+                <input type="text" name="title" id="todoWhat">
+            </div>
+            <div class="imgInput">
+                <input type="file" id="file" name="upload">
+            </div>
+            <div class="todoWho">
+                <label for="">누가 하나요 ?</label>
+                <input type="radio" name="who" id="WhoMe" value="me">나
+                <input type="radio" name="who" id="WhoOther" value="other">타인
+                <!-- <input type="text" name="who" id="_Who" value="text"> -->
+            </div>
+            <div class="todoRank">
+                <label for="">우선 순위</label>
+                <input type="radio" name="rank" id="first" value="1">1순위
+                <input type="radio" name="rank" id="second" value="2">2순위
+                <input type="radio" name="rank" id="third" value="3">3순위
+            </div>
+            <div class="btnWrap">
+                <button>닫기</button>
+                <button>지우기</button>
+                <button>등록</button>
+            </div>
+    </form>
+
+    </div>
+
+
+
+</body>
+<script></script>
+
+</html>
