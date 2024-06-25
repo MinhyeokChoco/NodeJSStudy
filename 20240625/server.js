@@ -29,10 +29,8 @@ app.post('/todoc', upload.single("upload"), async (req, res) => {
         const image = `/upload/${req.file.filename}`
         await todoLists.createTodos(title, image, who, rank, status);
     } catch (error) {
-        console.log(11);
-
+        console.log(error);
     }
-    console.log(title);
     res.redirect("/todoR");
 });
 
@@ -43,8 +41,8 @@ app.get('/todoR', async (req, res) => {
 
 app.put('/todo/:id', async (req, res) => {
     const { id } = req.params;
-    const { title, who, day, rank, stauts } = req.body;
-    await todoLists.updateTodo(id, title, who, day, rank, status);
+    const { title, who, day, rank } = req.body;
+    await todoLists.updateTodo(id, title, who, day, rank);
     res.redirect("/todoR");
 });
 
