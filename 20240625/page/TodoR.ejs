@@ -33,6 +33,30 @@
             <span>
                 <%= el.status %>
             </span>
+            <span>
+                <form action="/update/<%= el.id %>" method="post" enctype="multipart/form-data">
+                    <input type="file" name="image" value="<%= el.image %>">
+                    <input type="text" name="title" id="" value="<%= el.title %>">
+                    <span>
+                        <%= el.who %>
+                    </span>
+                    <select name="rank" id="">
+                        <option value="<%= el.rank %>">1순위</option>
+                        <option value="<%= el.rank %>">2순위</option>
+                        <option value="<%= el.rank %>">3순위</option>
+                    </select>
+                    <select name="status" id="">
+                        <option value="<%= el.status %>">완료</option>
+                        <option value="<%= el.status %>">미완료</option>
+                    </select>
+                    <button>수정</button>
+                </form>
+            </span>
+            <span>
+                <form action="/delete/<%= el.id %>" method="post">
+                    <button>삭제</button>
+                </form>
+            </span>
         </div>
         <% }) %>
 </body>

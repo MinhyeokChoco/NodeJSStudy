@@ -6,13 +6,13 @@ const todoLists = {
         try {
             const result = await mysql.query("SELECT * FROM lists");
         } catch (error) {
-            await mysql.query("CREATE TABLE lists(id INT AUTO_INCREMENT PRIMARY KEY, title varchar(50), image varchar(100), date datetime default now(), who varchar(10), `rank` int, status int default 1)");
+            await mysql.query("CREATE TABLE lists(id INT AUTO_INCREMENT PRIMARY KEY, image varchar(200), title varchar(100), date varchar(30), who varchar(10), `rank` varchar(5), status varchar(5))");
         }
     },
 
-    createTodos: async (title, img, who, rank) => {
+    createTodos: async (img, title, date, who, rank, status) => {
         try {
-            await mysql.query("INSERT INTO lists(title, image, who, `rank`) VALUES(?,?,?,?)", [title, img, who, rank]);
+            await mysql.query("INSERT INTO lists(image, title, date, who, `rank`, status) VALUES(?,?,?,?,?,?)", [img, title, date, who, rank, status]);
         } catch (error) {
             console.log("Error : models insert lists table", error)
         }
@@ -27,9 +27,9 @@ const todoLists = {
         }
     },
 
-    updateTodo: async (title, who, date, rank, status, id) => {
+    updateTodo: async (image, title, who, date, rank, status, id) => {
         try {
-            await mysql.query("UPDATE lists SET title = ?, who = ?, date = ?, `rank` = ?, status = ? WHERE id = ?", [title, who, date, rank, status, id]);
+            await mysql.query("UPDATE lists SET image = ?, title = ?, who = ?, date = ?,`rank` = ?, status = ? WHERE id = ?", [image, title, who, date, rank, status, id]);
         } catch (error) {
             console.log("Error : models update lists table", error);
         }
@@ -49,5 +49,6 @@ const todoLists = {
 // todoLists.listTodos();
 // todoLists.updateTodo();
 // todoLists.deleteTodo();
+// "/Users/leeminhyeok/Documents/MH/NodeJS/20240625/upload/ì¤í¬ë¦°ì· 2024-05-31 ì¤í 5.04.02_1719397982037.png", "ggg", "2024-06-26", 2, 2, 2
 
 module.exports = todoLists;

@@ -13,12 +13,15 @@
     <form action="/Todoc" method="post" enctype="multipart/form-data">
         <div class="todowrap">
             <div class="title">해야 할 일 등록</div>
+            <div class="imgInput">
+                <input type="file" id="file" name="upload">
+            </div>
             <div class="todoCreate">
                 <label for="">해야 할 일</label>
                 <input type="text" name="title" id="todoWhat">
             </div>
-            <div class="imgInput">
-                <input type="file" id="file" name="upload">
+            <div class="todoDate">
+                <input type="date" name="date" id="">
             </div>
             <div class="todoWho">
                 <label for="">누가 하나요 ?</label>
@@ -28,9 +31,21 @@
             </div>
             <div class="todoRank">
                 <label for="">우선 순위</label>
+                <!-- <select name="rank" id=""></select>
                 <input type="radio" name="rank" id="first" value="1">1순위
                 <input type="radio" name="rank" id="second" value="2">2순위
-                <input type="radio" name="rank" id="third" value="3">3순위
+                <input type="radio" name="rank" id="third" value="3">3순위 -->
+                <select name="rank" id="">
+                    <option value="1">1순위</option>
+                    <option value="2">2순위</option>
+                    <option value="3">3순위</option>
+                </select>
+            </div>
+            <div class="todoStatus">
+                <select name="status" id="">
+                    <option value="1">완료</option>
+                    <option value="2">미완료</option>
+                </select>
             </div>
             <div class="btnWrap">
                 <button>닫기</button>

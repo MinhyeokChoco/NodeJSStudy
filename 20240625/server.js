@@ -19,15 +19,20 @@ app.get('/', async (req, res) => {
     res.render("main");
 })
 
-app.get('/todoc', async (req, res) => {
-    res.render("todoc");
+app.get('/todoC', async (req, res) => {
+    res.render("todoC");
 })
 
-app.post('/todoc', upload.single("upload"), async (req, res) => {
+app.post('/todoC', upload.single("upload"), async (req, res) => {
     const { title, who, rank, status } = req.body;
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    const fkdate = `${year}-${month}-${day}`
     try {
         const image = `/upload/${req.file.filename}`
-        await todoLists.createTodos(title, image, who, rank, status);
+        await todoLists.createTodos(image, title, who, fkdate, rank, status);
     } catch (error) {
         console.log(error);
     }
@@ -39,15 +44,31 @@ app.get('/todoR', async (req, res) => {
     res.render("todoR", { todos });
 });
 
-app.put('/todo/:id', async (req, res) => {
-    const { id } = req.params;
-    const { title, who, day, rank } = req.body;
-    await todoLists.updateTodo(id, title, who, day, rank);
+app.post('/update/:id', upload.single("image"), async (req, res) => {
+    // console.log(id);
+    try {
+        const { id } = req.params;
+        const { title, who, rank, status } = req.body;
+        const image = `/upload/${req.file.filename}`
+        console.log(rank);
+        const date = new Date();
+        const year = date.getFullYear();
+        const month = date.getMonth() + 1;
+        const day = date.getDate();
+        const fkdate = `${year}-${month}-${day}`
+        console.log(date);
+        console.log(status);
+        await todoLists.updateTodo(image, title, who, fkdate, rank, status, id);
+    } catch (error) {
+        console.log('err : update');
+    }
+    // console.log({ image, title, date, rank, status })
     res.redirect("/todoR");
 });
 
-app.delete('/todo/:id', async (req, res) => {
+app.post('/delete/:id', async (req, res) => {
     const { id } = req.params;
+    console.log(id);
     await todoLists.deleteTodo(id);
     res.redirect("/todoR")
 });
