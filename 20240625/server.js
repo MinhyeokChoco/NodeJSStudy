@@ -45,12 +45,11 @@ app.get('/todoR', async (req, res) => {
 });
 
 app.post('/update/:id', upload.single("image"), async (req, res) => {
-    // console.log(id);
     try {
         const { id } = req.params;
         const { title, who, rank, status } = req.body;
         const image = `/upload/${req.file.filename}`
-        console.log(rank);
+        console.log(who);
         const date = new Date();
         const year = date.getFullYear();
         const month = date.getMonth() + 1;
