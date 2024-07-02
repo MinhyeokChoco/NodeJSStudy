@@ -15,11 +15,11 @@ app.set("views", path.join(__dirname, "page"));
 app.use("/upload", express.static(path.join(__dirname, "upload")));
 app.use("/upload", uploadRouter);
 
-app.get('/', async (req, res) => {
+app.get('/', (req, res) => {
     res.render("main");
 })
 
-app.get('/todoC', async (req, res) => {
+app.get('/todoC', (req, res) => {
     res.render("todoC");
 })
 
@@ -45,29 +45,25 @@ app.get('/todoR', async (req, res) => {
 });
 
 app.post('/update/:id', upload.single("image"), async (req, res) => {
+    const { id } = req.params;
+    const { title, who, rank, status } = req.body;
+    const image = `/upload/${req.file.filename}`
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    const fkdate = `${year}-${month}-${day}`
     try {
-        const { id } = req.params;
-        const { title, who, rank, status } = req.body;
-        const image = `/upload/${req.file.filename}`
-        console.log(who);
-        const date = new Date();
-        const year = date.getFullYear();
-        const month = date.getMonth() + 1;
-        const day = date.getDate();
-        const fkdate = `${year}-${month}-${day}`
-        console.log(date);
-        console.log(status);
-        await todoLists.updateTodo(image, title, who, fkdate, rank, status, id);
+        await todoLists.updateTodo(image, title, fkdate, who, rank, status, id);
+        console.log({ image, title, fkdate, who, rank, status, id });
     } catch (error) {
         console.log('err : update');
     }
-    // console.log({ image, title, date, rank, status })
     res.redirect("/todoR");
 });
 
 app.post('/delete/:id', async (req, res) => {
     const { id } = req.params;
-    console.log(id);
     await todoLists.deleteTodo(id);
     res.redirect("/todoR")
 });
@@ -75,3 +71,6 @@ app.post('/delete/:id', async (req, res) => {
 app.listen(PORT, () => {
     console.log("서버 대기 중");
 })
+
+// id 번호 자동 순서 바꾸기
+// update 수정

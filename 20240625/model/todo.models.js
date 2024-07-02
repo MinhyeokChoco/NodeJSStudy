@@ -27,9 +27,9 @@ const todoLists = {
         }
     },
 
-    updateTodo: async (image, title, who, date, rank, status, id) => {
+    updateTodo: async (image, title, date, who, rank, status, id) => {
         try {
-            await mysql.query("UPDATE lists SET image = ?, title = ?, who = ?, date = ?,`rank` = ?, status = ? WHERE id = ?", [image, title, who, date, rank, status, id]);
+            await mysql.query("UPDATE lists SET image = ?, title = ?, date = ?, who = ?,`rank` = ?, status = ? WHERE id = ?", [image, title, date, who, rank, status, id]);
         } catch (error) {
             console.log("Error : models update lists table", error);
         }
