@@ -7,30 +7,35 @@ class User extends Model {
             // 유저 아이디
             uid: {
                 type: DataTypes.STRING(30),
+                allowNull: false,
                 unique: true
             },
             // 유저 비밀번호
             upw: {
-                type: DataTypes.STRING(255)
+                type: DataTypes.STRING(255),
+                allowNull: false
             },
             // 유저 닉네임(작성자)
             uname: {
-                type: DataTypes.STRING(20)
+                type: DataTypes.STRING(20),
+                allowNull: false,
+                unique: true
             }
         }, {
             sequelize,
             timestamps: true,
-            underscored: false,
             modelName: "User",
             tableName: "users",
-            paranoid: false,
             charset: "utf8mb4",
             collate: "utf8mb4_general_ci"
+            // underscored: false,
+            // paranoid: false,
         });
     }
 
-    static assciate(db) {
-        db.Users.hasMany(db.Posts, { foreignKey: "user_name", sourceKey: "uname" });
+    static associate(db) {
+        console.log(db);
+        db.User.hasMany(db.Post, { foreignKey: "user_name", sourceKey: "uname" });
     }
 }
 

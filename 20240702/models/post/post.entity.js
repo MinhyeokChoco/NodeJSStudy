@@ -13,14 +13,14 @@ class Post extends Model {
             content: {
                 type: DataTypes.STRING(255)
             },
+
+            image: {
+                type: DataTypes.STRING(255)
+            },
             // 글 작성자
             // user_name: {
             //     type: DataTypes.STRING(10),
             //     allowNull: false
-            // },
-            // 글 작성일
-            // date: {
-            //     type: DataTypes.STRING(30),
             // },
             // 글 조회수
             view: {
@@ -37,7 +37,7 @@ class Post extends Model {
     }
 
     static associate(db) {
-        db.Posts.belongsTo(db.Users, { foreignKey: "user_name", target: "uname" });
+        db.Post.belongsTo(db.User, { foreignKey: "user_name", target: "uname" });
     }
 }
 
