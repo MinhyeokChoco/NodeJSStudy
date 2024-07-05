@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시글 작성</title>
+</head>
+
+<body>
+    <form action="/post/create" method="post" enctype="multipart/form-data">
+        <label for="">제목</label>
+        <input type="text" name="title" placeholder="제목을 입력해주세요.">
+        <label for="">내용</label>
+        <textarea name="content" cols="30" rows="5"></textarea>
+        <label for="">이미지</label>
+        <input type="file" name="image">
+        <button>글 작성</button>
+    </form>
+</body>
+
+</html>
