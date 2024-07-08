@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>수정 페이지</title>
+</head>
+
+<body>
+    <form action="/post/update" method="post">
+        <% data.forEach((el)=> { %>
+            <%= el.id %>
+                <%= el.title %>
+                    <input type="text" name="title">
+                    <%= el.content %>
+                        <textarea name="content" id=""></textarea>
+                        <%= el.image %>
+                            <input type="file" name="image">
+                            <button>글 수정</button>
+                            <% }) %>
+    </form>
+</body>
+
+</html>
