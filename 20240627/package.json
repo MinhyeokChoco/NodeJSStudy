@@ -1,0 +1,15 @@
+{
+  "name": "20240627",
+  "version": "1.0.0",
+  "description": "- 1:1  - 1:N  - N:1  - N:M",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@faker-js/faker": "^8.4.1"
+  }
+}

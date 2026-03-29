@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>뷰 페이지</title>
+</head>
+
+<body>
+    작성자 : <%= data.name %>
+        <ul>
+            <% data.Posts.forEach((el)=> { %>
+                <li>
+                    <%= el.id %>. <%= el.content %>
+                            <a href="/post_update/<%= data.name %>?id=<%= el.id %>">수정 페이지로</a>
+                            <form action="/view/<%= el.id %>" method="post">
+                                <input type="text" name="name" value="<%= data.name %>" hidden>
+                                <button>삭제</button>
+                            </form>
+
+                </li>
+                <% }) %>
+        </ul>
+</body>
+
+</html>

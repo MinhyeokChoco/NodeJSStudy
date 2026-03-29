@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="boardWrap">
+        <div class="boardContent">
+            <% data.forEach((el)=> { %>
+                <span>
+                    <%= el.title %>
+                </span>
+                <span>
+                    <%= el.content %>
+                </span>
+                <span>
+                    <%= el.view %>
+                </span>
+                <span>
+                    <%= el.createdAt %>
+                </span>
+                <span>
+                    <%= el.user_name %>
+                </span>
+                <% }) %>
+        </div>
+    </div>
+</body>
+
+</html>

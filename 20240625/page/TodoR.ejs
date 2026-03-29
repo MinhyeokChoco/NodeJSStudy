@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>할 일 목록</title>
+</head>
+
+<body>
+    <div class="todolist">리스트 페이지</div>
+    <a href="/todoC">작성 페이지로 이동</a>
+    <% todos.forEach((el)=> { %>
+        <div>
+            <span>
+                <%= el.id %>
+            </span>
+            <span>
+                <img src="<%=el.image %>">
+            </span>
+            <span>
+                <%= el.title %>
+            </span>
+            <span>
+                <%= el.date %>
+            </span>
+            <span>
+                <%= el.who %>
+            </span>
+            <span>
+                <%= el.rank %>
+            </span>
+            <span>
+                <%= el.status %>
+            </span>
+            <span>
+                <form action="/update/<%= el.id %>" method="post" enctype="multipart/form-data">
+                    <input type="file" name="image" value="<%= el.image %>">
+                    <input type="text" name="title" value="<%= el.title %>">
+                    <input type="text" name="date" value="<%= el.fkdate %>" hidden>
+                    <input type="text" name="who" value="<%= el.who %>" hidden>
+                    <select name="rank" id="<%= el.rank %>">
+                        <option value="<%= el.rank %>">1순위</option>
+                        <option value="<%= el.rank %>">2순위</option>
+                        <option value="<%= el.rank %>">3순위</option>
+                    </select>
+                    <select name="status" id="<%= el.status %>">
+                        <option value="<%= el.status %>">완료</option>
+                        <option value="<%= el.status %>">미완료</option>
+                    </select>
+                    <button>수정</button>
+                </form>
+            </span>
+            <span>
+                <form action="/delete/<%= el.id %>" method="post">
+                    <button>삭제</button>
+                </form>
+            </span>
+        </div>
+        <% }) %>
+</body>
+
+</html>
